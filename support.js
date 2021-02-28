@@ -71,7 +71,7 @@ function canMoveRight(board) {
 
 function canMoveUp(board) {
     for (let i = 1; i < 4; i++) {
-        for (let j = 0; j < 4; i++) {
+        for (let j = 0; j < 4; j++) {
             if (board[i][j] !== 0) {
                 if (board[i - 1][j] === 0 || board[i - 1][j] === board[i][j]) {
                     return true
@@ -80,7 +80,6 @@ function canMoveUp(board) {
         }
     }
     return false
-
 }
 
 function canMoveDown(board) {
@@ -113,4 +112,9 @@ function noBlockHorizontalRow(col, row1, row2, board) {
         }
     }
     return true
+}
+
+function noMove(board){
+    return !(canMoveDown(board) || canMoveLeft(board) || canMoveRight(board) || canMoveUp(board));
+
 }

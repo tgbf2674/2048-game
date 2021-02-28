@@ -2,32 +2,32 @@ $(document).keydown((e)=>{
     //left
     if(e.keyCode ===37){
         if(moveLeft()){
-            generateOneNumber()
-            isGameOver()
+            setTimeout("generateOneNumber()",210)
+            setTimeout("isGameOver()",300)
         }
         return
     }
     //up
     if(e.keyCode ===38){
         if(moveUp()) {
-            generateOneNumber()
-            isGameOver()
+            setTimeout("generateOneNumber()",210)
+            setTimeout("isGameOver()",300)
         }
         return
     }
     //right
     if(e.keyCode ===39){
         if(moveRight()){
-            generateOneNumber()
-            isGameOver()
+            setTimeout("generateOneNumber()",210)
+            setTimeout("isGameOver()",300)
         }
         return
     }
     //down
     if(e.keyCode ===40){
         if(moveDown()){
-            generateOneNumber()
-            isGameOver()
+            setTimeout("generateOneNumber()",210)
+            setTimeout("isGameOver()",300)
         }
         return
     }
@@ -35,8 +35,14 @@ $(document).keydown((e)=>{
 })
 
 function isGameOver() {
-
+    if(noMove(board)){
+        gameover()
+    }
 }
+function gameover(){
+    alert('游戏结束！')
+}
+
 function moveLeft() {
     if(!canMoveLeft(board)){
         return false
@@ -54,6 +60,9 @@ function moveLeft() {
                         showMoveAnimation(i,j,i,k)
                         board[i][k]*= 2
                         board[i][j]=0
+
+                        score += board[i][k]
+                        updateScore(score)
                     }
                 }
             }
@@ -79,6 +88,8 @@ function moveRight() {
                         showMoveAnimation(i,j,i,k)
                         board[i][k]*=2
                         board[i][j]=0
+                        score += board[i][k]
+                        updateScore(score)
                     }
                 }
             }
@@ -93,25 +104,27 @@ function moveUp(){
     if(!canMoveUp(board)){
         return false
     }
-    for (let i = 1;i<4;i++){
-        for (let j =0;j<4;j++){
-            if(board[i][j]!==0) {
-                for (let k = 0; k < i; k++) {
-                    if (board[k][j] === 0 && noBlockHorizontalRow(j, k, i, board)) {
-                        showMoveAnimation(i, j, k, j)
-                        board[k][j] = board[i][j]
-                        board[i][j] = 0
-                    } else if (board[k][j] === board[i][j] && noBlockHorizontalRow(j, k,i, board)) {
-                        showMoveAnimation(i, j, k, j)
-                        board[k][j] += board[i][j]
-                        board[i][j] = 0
+    for (let i=1;i<4;i++){
+        for (let j = 0;j<4;j++){
+            if(board[i][j]!==0){
+                for (let k=0;k<i;k++){
+                    if(board[k][j]===0 && noBlockHorizontalRow(j,k,i,board)){
+                        showMoveAnimation(i,j,k,j)
+                        board[k][j] =board[i][j]
+                        board[i][j]=0
+                    }else if(board[k][j]===board[i][j] && noBlockHorizontalRow(j,k,i,board)){
+                        showMoveAnimation(i,j,k,j)
+                        board[k][j] *= 2
+                        board[i][j]=0
+                        score += board[k][j]
+                        updateScore(score)
                     }
                 }
             }
-            }
         }
-        setTimeout("updateBoardView()",200)
-        return true
+    }
+    setTimeout("updateBoardView()",200)
+    return true
 }
 
 function moveDown() {
@@ -131,6 +144,8 @@ function moveDown() {
                         showMoveAnimation(i,j,k,j)
                         board[k][j] *= 2
                         board[i][j]=0
+                        score += board[k][j]
+                        updateScore(score)
                     }
                 }
             }
