@@ -118,7 +118,51 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 
   return newRequire;
 })({"support.js":[function(require,module,exports) {
+function getPosTop(i, j) {
+  return 20 + i * 120;
+}
 
+function getPosLeft(i, j) {
+  return 20 + j * 120;
+}
+
+function getNumberBackgroundColor(number) {
+  if (number === 2) {
+    return "#eee4da";
+  } else if (number === 4) {
+    return "#ede0c8";
+  } else if (number === 8) {
+    return "#f2b179";
+  } else if (number === 16) {
+    return "#f59563";
+  } else if (number === 32) {
+    return "#f67c5f";
+  } else if (number === 64) {
+    return "#f65e3b";
+  } else if (number === 128) {
+    return "#edcf72";
+  } else if (number === 256) {
+    return "#edcc61";
+  } else if (number === 512) {
+    return "#9c0";
+  } else if (number === 1024) {
+    return "#33b5e5";
+  } else if (number === 2048) {
+    return "#09c";
+  } else if (number === 4096) {
+    return "#a6c";
+  } else if (number === 8192) {
+    return "#93c";
+  }
+}
+
+function getNumberColor(number) {
+  if (number <= 4) {
+    return "#776e65";
+  }
+
+  return 'white';
+}
 },{}],"../../../AppData/Local/Yarn/Data/global/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -147,7 +191,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59901" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56790" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
